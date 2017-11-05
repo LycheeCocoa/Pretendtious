@@ -76,7 +76,9 @@ class Ui_Dialog(object):
         self.InputPhoneNumber.setGeometry(QtCore.QRect(10, 280, 141, 21))
         font = QtGui.QFont()
         font.setPointSize(16)
-        self.InputPhoneNumber.setFont(font)
+        nfont = QtGui.QFont()
+        nfont.setPointSize(10)
+        self.InputPhoneNumber.setFont(nfont)
         self.InputPhoneNumber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setObjectName("InputPhoneNumber")
@@ -156,13 +158,14 @@ class Ui_Dialog(object):
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-
+        self.InputPhoneNumber.textChanged.connect(self.writePhoneNumber)
         self.Pretendtious.toggled.connect(self.isPretendtious)
         #self.Pretendtious.toggled.connect()  
   
         #self.Boring.toggled.connect(self.isBoring)  
         self.Work.toggled.connect(self.isWork)  
-        self.Degenerator.toggled.connect(self.isDegenerator)  
+        self.Degenerator.toggled.connect(self.isDegenerator)
+        self.Degenerator.hide();
 
   
     def retranslateUi(self, Dialog):
@@ -198,7 +201,19 @@ class Ui_Dialog(object):
         self.RemoveWallpaperButton.setText(_translate("Dialog", "Remove Wallpaper"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab_2), _translate("Dialog", "Wallpaper"))
 
-        
+    def event(self, event): 
+        if event.type() == QtCore.QEvent.EnterWhatsThisMode:
+            self.isDegenerator2()
+            return True
+        return QtGui.QDialog.event(self, event)
+    def writePhoneNumber(self):
+        phone_number = self.InputPhoneNumber.toPlainText()
+        phone_number.replace(" ", "")
+        phone_number.replace("-", "")
+
+        with open(LIBRARYPATH + "phonenumber.txt", 'w+') as file:    
+            file.write(phone_number)
+
     def isPretendtious(self):
         if self.Pretendtious.isChecked():
             #self.Pretendtious.setText("0")
@@ -219,6 +234,15 @@ class Ui_Dialog(object):
             self.populateWebsite(1)
             self.populateWallpaper(1)
     
+    def isDegenerator2(self):
+            #self.Degenerator.setText("3")
+            #type_string = "Degenerator"
+            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+                file.write("3")
+            self.populateMusic(3)
+            self.populateWebsite(3)
+            self.populateWallpaper(3)
+
     def isDegenerator(self):
         if self.Degenerator.isChecked():
             #self.Degenerator.setText("3")
