@@ -16,9 +16,6 @@ LIBRARYPATH = HOMEDIR + "/Library/Pretendtious/"
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(599, 402)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
@@ -48,12 +45,12 @@ class Ui_Dialog(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.Pretentious = QtWidgets.QRadioButton(self.layoutWidget)
+        self.Pretendtious = QtWidgets.QRadioButton(self.layoutWidget)
         font = QtGui.QFont()
         font.setPointSize(14)
-        self.Pretentious.setFont(font)
-        self.Pretentious.setObjectName("Pretentious")
-        self.verticalLayout.addWidget(self.Pretentious)
+        self.Pretendtious.setFont(font)
+        self.Pretendtious.setObjectName("Pretendtious")
+        self.verticalLayout.addWidget(self.Pretendtious)
         self.Work = QtWidgets.QRadioButton(self.layoutWidget)
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -163,28 +160,33 @@ class Ui_Dialog(object):
         self.Pretendtious.toggled.connect(self.isPretendtious)
         #self.Pretendtious.toggled.connect()  
   
-        self.Boring.toggled.connect(self.isBoring)  
+        #self.Boring.toggled.connect(self.isBoring)  
         self.Work.toggled.connect(self.isWork)  
         self.Degenerator.toggled.connect(self.isDegenerator)  
 
+  
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time you launch the Pretendtious App the following settings will be applied. </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pick the profile you\'d like to use and/or edit.</p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">The next time you launch the Pretendtious App the following settings will be applied. </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Pick the profile you\'d like to use and/or edit.</span></p></body></html>"))
         self.Pretendtious.setText(_translate("Dialog", "Pretendtious"))
         self.Work.setText(_translate("Dialog", "Work"))
-        self.Boring.setText(_translate("Dialog", "Boring"))
         self.Degenerator.setText(_translate("Dialog", "Degenerator"))
         self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Input Phone Number</p></body></html>"))
+        self.InputPhoneNumber.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab), _translate("Dialog", "Profiles"))
         self.AddMusicButton.setText(_translate("Dialog", "Add Music"))
         self.RemoveMusicButton.setText(_translate("Dialog", "Remove Music"))
@@ -195,7 +197,6 @@ class Ui_Dialog(object):
         self.AddWallpaperButton.setText(_translate("Dialog", "Add Wallpaper"))
         self.RemoveWallpaperButton.setText(_translate("Dialog", "Remove Wallpaper"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab_2), _translate("Dialog", "Wallpaper"))
-
 
         
     def isPretendtious(self):
@@ -209,15 +210,15 @@ class Ui_Dialog(object):
             self.populateWallpaper(0)
 
 
-    def isBoring(self):
-        if self.Boring.isChecked():
-            #self.Boring.setText("1")
-            #type_string = "Boring"
-            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
-                file.write("2")
-            self.populateMusic(2)
-            self.populateWebsite(2)
-            self.populateWallpaper(2)
+    # def isBoring(self):
+    #     if self.Boring.isChecked():
+    #         #self.Boring.setText("1")
+    #         #type_string = "Boring"
+    #         with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+    #             file.write("2")
+    #         self.populateMusic(2)
+    #         self.populateWebsite(2)
+    #         self.populateWallpaper(2)
 
     def isWork(self):
         if self.Work.isChecked():
@@ -242,11 +243,11 @@ class Ui_Dialog(object):
     def populateMusic(self, mode):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretentious"        
+            profile_type = "Pretendtious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #   profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
         file = open(LIBRARYPATH + profile_type + "/music.txt")
@@ -267,11 +268,11 @@ class Ui_Dialog(object):
     def populateWallpaper(self, mode):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretentious"        
+            profile_type = "Pretendtious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #    profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
 
@@ -291,11 +292,11 @@ class Ui_Dialog(object):
     def populateWebsite(self, mode):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretentious"        
+            profile_type = "Pretendtious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #    profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
         file = open(LIBRARYPATH + profile_type + "/sites.txt")
