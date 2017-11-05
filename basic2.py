@@ -76,7 +76,9 @@ class Ui_Dialog(object):
         self.InputPhoneNumber.setGeometry(QtCore.QRect(10, 280, 141, 21))
         font = QtGui.QFont()
         font.setPointSize(16)
-        self.InputPhoneNumber.setFont(font)
+        nfont = QtGui.QFont()
+        nfont.setPointSize(10)
+        self.InputPhoneNumber.setFont(nfont)
         self.InputPhoneNumber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setObjectName("InputPhoneNumber")
@@ -156,7 +158,7 @@ class Ui_Dialog(object):
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-
+        self.InputPhoneNumber.textChanged.connect(self.writePhoneNumber)
         self.Pretendtious.toggled.connect(self.isPretendtious)
         #self.Pretendtious.toggled.connect()  
   
@@ -180,13 +182,13 @@ class Ui_Dialog(object):
         self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:14pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Input Phone Number</p></body></html>"))
         self.InputPhoneNumber.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab), _translate("Dialog", "Profiles"))
         self.AddMusicButton.setText(_translate("Dialog", "Add Music"))
         self.RemoveMusicButton.setText(_translate("Dialog", "Remove Music"))
@@ -198,7 +200,14 @@ class Ui_Dialog(object):
         self.RemoveWallpaperButton.setText(_translate("Dialog", "Remove Wallpaper"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab_2), _translate("Dialog", "Wallpaper"))
 
-        
+    def writePhoneNumber(self):
+        phone_number = self.InputPhoneNumber.toPlainText()
+        phone_number.replace(" ", "")
+        phone_number.replace("-", "")
+
+        with open(LIBRARYPATH + "phonenumber.txt", 'w+') as file:    
+            file.write(phone_number)
+
     def isPretendtious(self):
         if self.Pretendtious.isChecked():
             #self.Pretendtious.setText("0")
@@ -301,18 +310,6 @@ class Ui_Dialog(object):
             web.setFlags(QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled)
             self.WebSiteTable.setItem(count,0, web)
         file.close()
-    
-    #def addWebsiteTo(website_link, profile):
-
-    #def removeWebsiteFrom(website_link, profile):
-
-    #def addMusicTo(website_link, profile):
-
-    #def removeMusicFrom(website_link, profile):
-
-    #def addWallpaperTo(website_link, profile):
-
-    #def RemoveWallpaperFrom(website_link, profile):
 
 if __name__ == "__main__":
     import sys
