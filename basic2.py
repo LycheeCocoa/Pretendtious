@@ -9,19 +9,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import os
+
 HOMEDIR = os.path.expanduser("~")
 LIBRARYPATH = HOMEDIR + "/Library/Pretendtious/"
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        mode = 0;
         Dialog.setObjectName("Dialog")
         Dialog.resize(599, 402)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(250, 370, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.TabContainer = QtWidgets.QTabWidget(Dialog)
         self.TabContainer.setEnabled(True)
@@ -36,30 +36,35 @@ class Ui_Dialog(object):
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.textEdit = QtWidgets.QTextEdit(self.tab)
-        self.textEdit.setGeometry(QtCore.QRect(10, 10, 411, 51))
+        self.textEdit.setGeometry(QtCore.QRect(10, 10, 421, 81))
         self.textEdit.setAutoFillBackground(False)
         self.textEdit.setObjectName("textEdit")
         self.layoutWidget = QtWidgets.QWidget(self.tab)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 70, 86, 171))
+        self.layoutWidget.setGeometry(QtCore.QRect(10, 90, 301, 171))
         self.layoutWidget.setObjectName("layoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.Pretendtious = QtWidgets.QRadioButton(self.layoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.Pretendtious.setFont(font)
         self.Pretendtious.setObjectName("Pretendtious")
         self.verticalLayout.addWidget(self.Pretendtious)
         self.Work = QtWidgets.QRadioButton(self.layoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.Work.setFont(font)
         self.Work.setObjectName("Work")
         self.verticalLayout.addWidget(self.Work)
-        self.Boring = QtWidgets.QRadioButton(self.layoutWidget)
-        self.Boring.setObjectName("Boring")
-        self.verticalLayout.addWidget(self.Boring)
-        self.Boring.hide()
         self.Degenerator = QtWidgets.QRadioButton(self.layoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        self.Degenerator.setFont(font)
         self.Degenerator.setObjectName("Degenerator")
         self.verticalLayout.addWidget(self.Degenerator)
         self.textBrowser = QtWidgets.QTextBrowser(self.tab)
-        self.textBrowser.setGeometry(QtCore.QRect(110, 70, 131, 21))
+        self.textBrowser.setGeometry(QtCore.QRect(10, 260, 131, 21))
         self.textBrowser.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         self.textBrowser.setAcceptDrops(False)
         self.textBrowser.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -68,17 +73,13 @@ class Ui_Dialog(object):
         self.textBrowser.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser.setObjectName("textBrowser")
         self.InputPhoneNumber = QtWidgets.QTextEdit(self.tab)
-        self.InputPhoneNumber.setGeometry(QtCore.QRect(110, 100, 141, 21))
+        self.InputPhoneNumber.setGeometry(QtCore.QRect(10, 280, 141, 21))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        self.InputPhoneNumber.setFont(font)
         self.InputPhoneNumber.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.InputPhoneNumber.setObjectName("InputPhoneNumber")
-        self.textEdit.raise_()
-        self.layoutWidget.raise_()
-        self.Boring.raise_()
-        self.Boring.raise_()
-        self.Pretendtious.raise_()
-        self.textBrowser.raise_()
-        self.InputPhoneNumber.raise_()
         self.TabContainer.addTab(self.tab, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -155,31 +156,37 @@ class Ui_Dialog(object):
         self.buttonBox.rejected.connect(Dialog.reject)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+
         self.Pretendtious.toggled.connect(self.isPretendtious)
         #self.Pretendtious.toggled.connect()  
   
-        self.Boring.toggled.connect(self.isBoring)  
+        #self.Boring.toggled.connect(self.isBoring)  
         self.Work.toggled.connect(self.isWork)  
         self.Degenerator.toggled.connect(self.isDegenerator)  
 
+  
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time you launch the Pretendtious App the following settings will be applied. </p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pick the profile you\'d like to use and/or edit.</p></body></html>"))
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">The next time you launch the Pretendtious App the following settings will be applied. </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Pick the profile you\'d like to use and/or edit.</span></p></body></html>"))
         self.Pretendtious.setText(_translate("Dialog", "Pretendtious"))
         self.Work.setText(_translate("Dialog", "Work"))
-        self.Boring.setText(_translate("Dialog", "Boring"))
         self.Degenerator.setText(_translate("Dialog", "Degenerator"))
         self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Input Phone Number</p></body></html>"))
+        self.InputPhoneNumber.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab), _translate("Dialog", "Profiles"))
         self.AddMusicButton.setText(_translate("Dialog", "Add Music"))
         self.RemoveMusicButton.setText(_translate("Dialog", "Remove Music"))
@@ -191,7 +198,6 @@ class Ui_Dialog(object):
         self.RemoveWallpaperButton.setText(_translate("Dialog", "Remove Wallpaper"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab_2), _translate("Dialog", "Wallpaper"))
 
-
         
     def isPretendtious(self):
         if self.Pretendtious.isChecked():
@@ -201,16 +207,7 @@ class Ui_Dialog(object):
                 file.write("0")
             self.populateMusic(0)
             self.populateWebsite(0)
-
-
-    def isBoring(self):
-        if self.Boring.isChecked():
-            #self.Boring.setText("1")
-            #type_string = "Boring"
-            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
-                file.write("2")
-            self.populateMusic(2)
-            self.populateWebsite(2)
+            self.populateWallpaper(0)
 
     def isWork(self):
         if self.Work.isChecked():
@@ -220,6 +217,7 @@ class Ui_Dialog(object):
                 file.write("1") 
             self.populateMusic(1)
             self.populateWebsite(1)
+            self.populateWallpaper(1)
     
     def isDegenerator(self):
         if self.Degenerator.isChecked():
@@ -229,6 +227,7 @@ class Ui_Dialog(object):
                 file.write("3")
             self.populateMusic(3)
             self.populateWebsite(3)
+            self.populateWallpaper(3)
 
     def populateMusic(self, mode):
         profile_type = ""
@@ -236,8 +235,8 @@ class Ui_Dialog(object):
             profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #   profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
         file = open(LIBRARYPATH + profile_type + "/music.txt")
@@ -255,21 +254,22 @@ class Ui_Dialog(object):
             self.MusicTable.setItem(count,0, music)
         file.close()
 
-    def populateWallpaper(self, profile):
+    def populateWallpaper(self, mode):
         profile_type = ""
         if(mode == 0):
             profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #    profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        with open(LIBRARYPATH + profile_type + "/wallpaper.txt", 'w+') as file: 
-            arr = []
-            for line in file.readlines():
-                arr.append(line)
 
+        arr = []
+        for filename in os.listdir(LIBRARYPATH + profile_type + "/wallpapers/"):
+            if filename.endswith(".png") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
+                arr.append(filename)
+            
         self.WallPaperTable.setRowCount(len(arr))
         self.WallPaperTable.setColumnCount(1)
 
@@ -277,7 +277,6 @@ class Ui_Dialog(object):
             wall = QTableWidgetItem(str(i))
             wall.setFlags(QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled)
             self.WallPaperTable.setItem(count,0, wall)
-        file.close()
 
     def populateWebsite(self, mode):
         profile_type = ""
@@ -285,8 +284,8 @@ class Ui_Dialog(object):
             profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
-        elif(mode == 2):
-            profile_type = "boring"
+        #elif(mode == 2):
+        #    profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
         file = open(LIBRARYPATH + profile_type + "/sites.txt")
@@ -302,6 +301,7 @@ class Ui_Dialog(object):
             web.setFlags(QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled)
             self.WebSiteTable.setItem(count,0, web)
         file.close()
+    
     #def addWebsiteTo(website_link, profile):
 
     #def removeWebsiteFrom(website_link, profile):
