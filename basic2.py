@@ -9,13 +9,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
 import os
+
 HOMEDIR = os.path.expanduser("~")
 LIBRARYPATH = HOMEDIR + "/Library/Pretendtious/"
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
-        mode = 0;
         Dialog.setObjectName("Dialog")
         Dialog.resize(599, 402)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
@@ -256,20 +256,22 @@ class Ui_Dialog(object):
         file.close()
 
     def populateWallpaper(self, profile):
-        profile_type = ""
+                profile_type = ""
         if(mode == 0):
-            profile_type = "pretentious"        
+            profile_type = "pretendtious"        
         elif(mode == 1):
             profile_type = "work"
         elif(mode == 2):
             profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        with open(LIBRARYPATH + profile_type + "/wallpaper.txt", 'w+') as file: 
-            arr = []
-            for line in file.readlines():
-                arr.append(line)
+        file = open(profile_type + "/wallpaper/")
 
+        arr = []
+        for images in os.listdir(file):
+            if images.endswith(".png") || images.endswith(".jpeg"):
+            arr.append(os.path.join(file, images))
+            
         self.WallPaperTable.setRowCount(len(arr))
         self.WallPaperTable.setColumnCount(1)
 
@@ -302,6 +304,7 @@ class Ui_Dialog(object):
             web.setFlags(QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled)
             self.WebSiteTable.setItem(count,0, web)
         file.close()
+    
     #def addWebsiteTo(website_link, profile):
 
     #def removeWebsiteFrom(website_link, profile):
