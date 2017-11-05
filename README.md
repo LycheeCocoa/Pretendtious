@@ -29,7 +29,7 @@ Pretendtious gives users the ability to hide valuable or embarrassing informatio
 - Opens many embarrassing tabs
 - Sends automated text messages and notifications regarding upcoming conventions and events
 
-### How to use
+## Usage
 -
 
 ### Programs and Software Used

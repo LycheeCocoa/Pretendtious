@@ -8,6 +8,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+import os
+HOMEDIR = os.path.expanduser("~")
+LIBRARYPATH = HOMEDIR + "/Library/Pretendtious/"
 
 
 class Ui_Dialog(object):
@@ -165,7 +168,7 @@ class Ui_Dialog(object):
         self.textEdit.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">The next time you launch the Pretendtious App the following settings will be applied. </p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Pick the profile you\'d like to use and/or edit.</p></body></html>"))
         self.Pretendtious.setText(_translate("Dialog", "Pretendtious"))
@@ -175,7 +178,7 @@ class Ui_Dialog(object):
         self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Input Phone Number</p></body></html>"))
         self.TabContainer.setTabText(self.TabContainer.indexOf(self.tab), _translate("Dialog", "Profiles"))
         self.AddMusicButton.setText(_translate("Dialog", "Add Music"))
@@ -194,50 +197,54 @@ class Ui_Dialog(object):
         if self.Pretendtious.isChecked():
             #self.Pretendtious.setText("0")
             #type_string = "Pretendtious"
-            file = open('mode.txt','w')
-            mode = 0
-            file.write("0")
+            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+                file.write("0")
             self.populateMusic(0)
+            self.populateWebsite(0)
+
 
     def isBoring(self):
         if self.Boring.isChecked():
             #self.Boring.setText("1")
             #type_string = "Boring"
-            file = open('mode.txt','w')
-            mode = 2 
-            file.write("2")
+            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+                file.write("2")
+            self.populateMusic(2)
+            self.populateWebsite(2)
 
     def isWork(self):
         if self.Work.isChecked():
             #self.Work.setText("2")
             #type_string = "Work"
-            file = open('mode.txt','w') 
-            mode = 1
-            file.write("1")
+            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+                file.write("1") 
+            self.populateMusic(1)
+            self.populateWebsite(1)
     
     def isDegenerator(self):
         if self.Degenerator.isChecked():
             #self.Degenerator.setText("3")
             #type_string = "Degenerator"
-            file = open('mode.txt','w') 
-            mode = 3
-            file.write("3")
+            with open(LIBRARYPATH + "mode.txt", 'w+') as file:
+                file.write("3")
+            self.populateMusic(3)
+            self.populateWebsite(3)
 
     def populateMusic(self, mode):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretendtious"        
+            profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
         elif(mode == 2):
             profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        file = open(profile_type + "/music.txt")
+        file = open(LIBRARYPATH + profile_type + "/music.txt")
         arr = []
-        for aline in file.readlines():
-            # values = aline.splitlines()
-            arr.append(aline)
+        for line in file.readlines():
+            # values = line.splitlines()
+            arr.append(line)
 
         self.MusicTable.setRowCount(len(arr))
         self.MusicTable.setColumnCount(1)
@@ -248,20 +255,20 @@ class Ui_Dialog(object):
             self.MusicTable.setItem(count,0, music)
         file.close()
 
-    def populateWallpaper(profile):
+    def populateWallpaper(self, profile):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretendtious"        
+            profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
         elif(mode == 2):
             profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        file = open(profile_type + "/wallpaper.txt")
-        arr = []
-        for aline in file.readlines():
-            arr.append(aline)
+        with open(LIBRARYPATH + profile_type + "/wallpaper.txt", 'w+') as file: 
+            arr = []
+            for line in file.readlines():
+                arr.append(line)
 
         self.WallPaperTable.setRowCount(len(arr))
         self.WallPaperTable.setColumnCount(1)
@@ -272,20 +279,20 @@ class Ui_Dialog(object):
             self.WallPaperTable.setItem(count,0, wall)
         file.close()
 
-    def populateWebsite(profile):
+    def populateWebsite(self, mode):
         profile_type = ""
         if(mode == 0):
-            profile_type = "pretendtious"        
+            profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
         elif(mode == 2):
             profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        file = open(profile_type + "/website.txt")
+        file = open(LIBRARYPATH + profile_type + "/sites.txt")
         arr = []
-        for aline in file.readlines():
-            arr.append(aline)
+        for line in file.readlines():
+            arr.append(line)
 
         self.WebSiteTable.setRowCount(len(arr))
         self.WebSiteTable.setColumnCount(1)
