@@ -21,7 +21,7 @@ class Ui_Dialog(object):
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(250, 370, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.TabContainer = QtWidgets.QTabWidget(Dialog)
         self.TabContainer.setEnabled(True)
@@ -201,6 +201,7 @@ class Ui_Dialog(object):
                 file.write("0")
             self.populateMusic(0)
             self.populateWebsite(0)
+            self.populateWallpaper(0)
 
 
     def isBoring(self):
@@ -211,6 +212,7 @@ class Ui_Dialog(object):
                 file.write("2")
             self.populateMusic(2)
             self.populateWebsite(2)
+            self.populateWallpaper(2)
 
     def isWork(self):
         if self.Work.isChecked():
@@ -220,6 +222,7 @@ class Ui_Dialog(object):
                 file.write("1") 
             self.populateMusic(1)
             self.populateWebsite(1)
+            self.populateWallpaper(1)
     
     def isDegenerator(self):
         if self.Degenerator.isChecked():
@@ -229,6 +232,7 @@ class Ui_Dialog(object):
                 file.write("3")
             self.populateMusic(3)
             self.populateWebsite(3)
+            self.populateWallpaper(3)
 
     def populateMusic(self, mode):
         profile_type = ""
@@ -255,22 +259,21 @@ class Ui_Dialog(object):
             self.MusicTable.setItem(count,0, music)
         file.close()
 
-    def populateWallpaper(self, profile):
-                profile_type = ""
+    def populateWallpaper(self, mode):
+        profile_type = ""
         if(mode == 0):
-            profile_type = "pretendtious"        
+            profile_type = "pretentious"        
         elif(mode == 1):
             profile_type = "work"
         elif(mode == 2):
             profile_type = "boring"
         elif(mode == 3):
             profile_type = "degenerator"
-        file = open(profile_type + "/wallpaper/")
 
         arr = []
-        for images in os.listdir(file):
-            if images.endswith(".png") || images.endswith(".jpeg"):
-            arr.append(os.path.join(file, images))
+        for filename in os.listdir(LIBRARYPATH + profile_type + "/wallpapers/"):
+            if filename.endswith(".png") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
+                arr.append(filename)
             
         self.WallPaperTable.setRowCount(len(arr))
         self.WallPaperTable.setColumnCount(1)
@@ -279,7 +282,6 @@ class Ui_Dialog(object):
             wall = QTableWidgetItem(str(i))
             wall.setFlags(QtCore.Qt.ItemIsSelectable |  QtCore.Qt.ItemIsEnabled)
             self.WallPaperTable.setItem(count,0, wall)
-        file.close()
 
     def populateWebsite(self, mode):
         profile_type = ""
